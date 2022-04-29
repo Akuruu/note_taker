@@ -26,4 +26,18 @@ class Store {
     }
 }
 
+newNote(note) {
+const {title, text} = note;
+if (!title || !text) {
+    throw new Error("Please write something in 'Title' and 'Text'.");
+}
+
+const addNote = {title, text, id: uuidv1()};
+
+return this.getNotes()
+.then(notes => [...notes, newNote])
+.then(updatedNotes => this.write(updatedNotes))
+.then(() => addNote);
+}
+
 module.exports = new Store();
