@@ -24,7 +24,7 @@ class Store {
             return parsedNotes;
         });
     }
-}
+
 
 newNote(note) {
 const {title, text} = note;
@@ -39,5 +39,5 @@ return this.getNotes()
 .then(updatedNotes => this.write(updatedNotes))
 .then(() => addNote);
 }
-
+}
 module.exports = new Store();
