@@ -1,4 +1,4 @@
-// require path and router items needed
+// Require path and router items needed
 const path = require('path');
 const router = require('express').Router();
 
@@ -11,5 +11,5 @@ router.get('*', (req, res) => {
     res.sendFile(path.join(_dirname, "../public/index.html"));
 });
 
-// export the router
+// Export the router
 module.exports = router; 
