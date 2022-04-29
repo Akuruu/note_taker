@@ -1,18 +1,19 @@
 // require the Util and fs
 const util = require('util');
 const fs = require('fs');
-const uuidv1 = require('uuid/v1');
+const { v1: uuidv1 } = require('uuid');
 const readNote = util.promisify(fs.readFile);
 const writeNote = util.promisify(fs.writeFile);
 
-
 class Store {
+    write(note) {
+        return writeNote('db/db.json', JSON.stringify(note));
+    }
+
     read() {
         return readNote('db/db.json', 'utf8');
     }
-    write() {
-        return writeNote('db/db.json', JSON.stringify(note));
-    }
+    // Get existing notes
     getNotes() {
         return this.read().then(notes => {
             let parsedNotes;
@@ -24,28 +25,20 @@ class Store {
             return parsedNotes;
         });
     }
-
-    // Updates notes
-    newNote(note) {
-        const { title, text } = note;
-        // If the title and text boxes are empty, prompt the user with an error
-        if (!title || !text) {
-            throw new Error("Please write something in 'Title' and 'Text'.");
-        }
-
-        const addNote = { title, text, id: uuidv1() };
-
+   // Adds a note 
+    newNote() {
+        const newNote = { title, text, id: uuidv1() };
         return this.getNotes()
             .then(notes => [...notes, newNote])
             .then(updatedNotes => this.write(updatedNotes))
-            .then(() => addNote);
+            .then(() => newNote);
     }
-    // Deletes notes with a specific id and writes the sorted ones
+    // DELETE a note
     deleteNote(id) {
         return this.getNotes()
-        .then(notes => notes.filter(note => note.id !== id))
-        .then(sortedNotes => this.write(sortedNotes))
+            .then(notes => notes.filter(note => note.id !== id))
+            .then(filteredNotes => this.write(filteredNotes));
     }
 }
-// Exports 
+
 module.exports = new Store();

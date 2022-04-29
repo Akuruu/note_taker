@@ -2,30 +2,29 @@
 const router = require('express').Router();
 const db = require('../db/store');
 
-
 // GET request
-router.get('/notes', (req, res) => {
+router.get('/notes', function (req, res) {
     db
     .getNotes()
     .then(notes => res.json(notes))
-    .catch(err => res.status(500).json(err))
+    .catch(err => res.status(500).json(err));
 });
 
 // POST request
 router.post('/notes', (req, res) => {
-    db 
+    db
     .newNote(req.body)
     .then((note) => res.json(note))
-    .catch(err => res.status(500).json(err))
+    .catch(err => res.status(500).json(err));
 });
 
-// DELETE a note
-router.delete('/notes/:id', (req, res) => {
+// DELETE
+router.delete('/notes/:id', function (req, res) {
     db
     .deleteNote(req.params.id)
-    .then(() => res.json({ ok:true}))
-    .catch(err =>res.status(500).json(err))
+    .then(() => res.json({ ok: true }))
+    .catch(err => res.status(500).json(err));
 });
 
-// Export the router
-module.exports = router;
+// Exports the router
+module.exports = router
