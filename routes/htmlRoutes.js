@@ -2,15 +2,14 @@
 const path = require('path');
 const router = require('express').Router();
 
-// need to add the router.get functionality for each of the hhtml pages
-// notes page
+// Notes page
 router.get('/notes', (req, res) => {
     res.sendFile(path.join(_dirname, "../public/notes.html"));
 });
-
+// Index page
 router.get('*', (req, res) => {
     res.sendFile(path.join(_dirname, "../public/index.html"));
 });
 
-// export the routes
+// export the router
 module.exports = router; 
