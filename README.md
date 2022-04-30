@@ -11,10 +11,7 @@
       
  - [Showcase](#link) 
 
-      
- - [Installation Instructions](#install)
-
-      
+        
  - [Usage Information](#usage) 
 
  
@@ -44,14 +41,6 @@
 
 
       
- ## Installation Instructions
-
-      
------------------------------------------
- 
-      
- please run `npm install` to install the required dependencies.
-
 
       
  ## Usage Information 
