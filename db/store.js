@@ -27,7 +27,8 @@ class Store {
         });
     }
    // Adds a note 
-    newNote() {
+    newNote(note) {
+        const {title, text} = note;
         const newNote = { title, text, id: uuidv1() };
         return this.getNotes()
             .then(notes => [...notes, newNote])
@@ -37,6 +38,7 @@ class Store {
     // DELETE a note
     deleteNote(id) {
         return this.getNotes()
+        // Filters notes by their id
             .then(notes => notes.filter(note => note.id !== id))
             .then(filteredNotes => this.write(filteredNotes));
     }
